@@ -9,8 +9,13 @@ public interface IReservationRepository
 
   Task<bool> DeleteReservation(Guid id);
 
+  Task<IEnumerable<Reservation>> GetByDateReservation(DateTime date);
 
   Task<Reservation?> GetByIdAsync(int id);
   
   Task SaveChangesAsync();
+
+
+
+
 }

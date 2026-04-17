@@ -48,6 +48,21 @@ public class ReservationService : IReservationService
     return await _reservationRepository.DeleteReservation(id);
   }
 
+//metodo de filtrado por fecha del service
+  public async Task<IEnumerable<ReservationResponse>> GetByDateReservation(DateTime date)
+{
+    var reservations = await _reservationRepository.GetByDateReservation(date);
+
+    return reservations.Select(res => new ReservationResponse
+    {
+        Id = res.Id,
+        ClassroomId = res.ClassroomId,
+        Date = res.Date,
+        StartTime = res.StartTime,
+        EndTime = res.EndTime
+    });
+}
+
 
 
 

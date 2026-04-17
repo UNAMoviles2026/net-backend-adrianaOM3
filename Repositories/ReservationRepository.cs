@@ -40,6 +40,14 @@ public class ReservationRepository : IReservationRepository
 
     return true;
   }
+  //filtrado por fecha utlizando query en .net
+  public async Task<IEnumerable<Reservation>> GetByDateReservation(DateTime date)
+  {
+    return await _context.Reservations
+    .AsNoTracking()
+        .Where(res => res.Date == DateOnly.FromDateTime(date))
+        .ToListAsync();
+  }
   public async Task<Reservation?> GetByIdAsync(int id)
   {
     return await _context.Reservations.FindAsync(id);

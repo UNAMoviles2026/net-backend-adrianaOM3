@@ -9,4 +9,6 @@ public interface IReservationService
 
   Task<bool> DeleteReservation(Guid id);
 
+  Task<IEnumerable<ReservationResponse>> GetByDateReservation(DateTime date);
+
 }
