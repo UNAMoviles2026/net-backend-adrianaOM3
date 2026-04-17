@@ -2,13 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using reservations_api.DTOs.Requests;
 using reservations_api.Services;
 
+
+
+
 namespace reservations_api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ReservationsController : ControllerBase
 {
+
   private readonly IReservationService _reservationService;
+
 
   public ReservationsController(IReservationService reservationService)
   {
@@ -45,4 +50,22 @@ public class ReservationsController : ControllerBase
       throw;
     }
   }
+
+  //eliminar una reservacion
+  [HttpDelete]
+  [Route("{id}")]
+  public async Task<IActionResult> DeleteReservation(Guid id)
+  {
+    var result = await _reservationService.DeleteReservation(id);
+
+    if (!result)
+      return NotFound();
+
+    return NoContent();
+  }
+
+
+  
+
+
 }
