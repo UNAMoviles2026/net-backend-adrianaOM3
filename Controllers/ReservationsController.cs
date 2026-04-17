@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using reservations_api.DTOs.Requests;
+using reservations_api.DTOs.Responses;
 using reservations_api.Services;
 
 
@@ -64,8 +65,21 @@ public class ReservationsController : ControllerBase
     return NoContent();
   }
 
+  //obtener por filtrado de la fecha de la reservacion
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<ReservationResponse>>> GetByDate([FromQuery] DateTime date)
+  {
+    if (!ModelState.IsValid)
+    {
+      return BadRequest(ModelState);
+    }
 
-  
+    var reservations = await _reservationService.GetByDateReservation(date);
+    return Ok(reservations);
+  }
+
+
+
 
 
 }
